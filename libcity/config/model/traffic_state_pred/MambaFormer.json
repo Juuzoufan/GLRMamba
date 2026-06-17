@@ -1,0 +1,20 @@
+{
+    "input_dim": 1,
+    "output_dim": 1,
+    "x_feature_dim": 3,
+    "d_model": 64,
+    "n_heads": 4,
+    "n_layers": 2,
+    "n_proxies": 16,
+    "d_state": 16,
+    "n_freqs": 32,
+    "scales": [
+        3,
+        5,
+        7
+    ],
+    "dropout": 0.1,
+    "use_contrastive": true,
+    "contrastive_weight": 0.1,
+    "set_loss": "masked_mae"
+}

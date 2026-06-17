@@ -1,17 +1,30 @@
-# GLRMamba
+# GLRMamba Reproducibility Package
 
-Core model code for **GLRMamba: Normalized Graph-Guided State Space Modeling
-for Centralized IoT Roadway Traffic Forecasting**.
+This repository contains the executable implementation used for
+**GLRMamba: Normalized Graph-Guided State Space Modeling for Centralized IoT
+Roadway Traffic Forecasting**.
 
-This folder intentionally keeps only the main PyTorch model implementation.
-It does not include datasets, checkpoints, training logs, ablation scripts, or
-the original LibCity experiment framework.
+The code is organized as a lightweight LibCity-style traffic forecasting
+pipeline. The model class is named `MambaFormer` in the pipeline for historical
+compatibility, but it implements the GLRMamba architecture described in the
+manuscript. A standalone PyTorch version is also provided in `glrmamba.py`.
 
 ## Files
 
 ```text
 GLRMamba/
 |-- glrmamba.py
+|-- run_model.py
+|-- mambaformer_pemsd{3,4,7,8}_config.json
+|-- libcity/
+|   |-- data/
+|   |-- evaluator/
+|   |-- executor/
+|   |-- model/traffic_flow_prediction/MambaFormer.py
+|   `-- pipeline/
+|-- raw_data/README.md
+|-- DATA_PREPARATION.md
+|-- REPRODUCIBILITY_STATUS.md
 |-- requirements.txt
 |-- LICENSE
 `-- README.md
@@ -19,16 +32,20 @@ GLRMamba/
 
 ## Scope
 
-This repository is intended for public release of the core model architecture.
-It is not a full experimental reproduction package. Raw datasets, checkpoints,
-training logs, baseline implementations, and manuscript-specific experiment
-scripts are not included.
+This repository provides the proposed GLRMamba model, the LibCity-style
+training/evaluation pipeline, dataset configuration files, and data preparation
+instructions for the main experiments.
+
+Raw PEMSD datasets, large generated caches, full checkpoints, and third-party
+baseline implementations are not included. Ablation, hyperparameter-sensitivity,
+and visualization scripts are kept out of this public repository to keep the
+release focused on the main experimental pipeline.
 
 ## Relationship to LibCity
 
-The full experimental workflow of GLRMamba was organized in a LibCity-style
-traffic forecasting pipeline. This lightweight repository keeps only the core
-PyTorch model for public inspection and reuse.
+The experimental workflow of GLRMamba follows a LibCity-style traffic
+forecasting pipeline. The included `libcity/` folder is a compact, adapted
+subset used to run the GLRMamba experiments.
 
 For the complete urban spatial-temporal prediction framework, dataset format,
 and evaluation pipeline, please refer to LibCity:
@@ -39,16 +56,70 @@ and evaluation pipeline, please refer to LibCity:
 
 ## Install
 
+The reported experiments were run with Python 3.8, PyTorch 1.12.1, CUDA 11.3,
+and an NVIDIA GPU.
+
 ```bash
+conda create -n glrmamba python=3.8 -y
+conda activate glrmamba
 pip install -r requirements.txt
 ```
 
-`mamba-ssm` is optional. If it is not installed, `glrmamba.py` uses a small
-Conv1d fallback so the model structure can still be imported and smoke-tested.
-For reproducing reported results, install `mamba-ssm` in a CUDA-compatible
-environment.
+For the reported GLRMamba setting, install `mamba-ssm` separately in a
+CUDA-enabled Linux environment compatible with your PyTorch/CUDA version. If
+`mamba-ssm` is unavailable, the code falls back to a Conv1d temporal block so
+that the pipeline can still be inspected and smoke-tested; this fallback is
+not the reported experimental setting.
 
-## Quick Test
+## Data
+
+Raw PEMSD datasets are not committed to this repository. Place each dataset
+under `raw_data/<DATASET>/` in LibCity format:
+
+```text
+raw_data/
+  PEMSD3/
+    PEMSD3.geo
+    PEMSD3.rel
+    PEMSD3.dyna
+    config.json
+  PEMSD4/
+    PEMSD4.geo
+    PEMSD4.rel
+    PEMSD4.dyna
+    config.json
+  PEMSD7/
+    PEMSD7.geo
+    PEMSD7.rel
+    PEMSD7.dyna
+    config.json
+  PEMSD8/
+    PEMSD8.geo
+    PEMSD8.rel
+    PEMSD8.dyna
+    config.json
+```
+
+See `DATA_PREPARATION.md` and `raw_data/README.md` for details.
+
+## Run Main Experiments
+
+```bash
+python run_model.py --config_file mambaformer_pemsd3_config
+python run_model.py --config_file mambaformer_pemsd4_config
+python run_model.py --config_file mambaformer_pemsd7_config
+python run_model.py --config_file mambaformer_pemsd8_config
+```
+
+Generated checkpoints and evaluation files are written to:
+
+```text
+libcity/cache/<exp_id>/model_cache/
+libcity/cache/<exp_id>/evaluate_cache/
+libcity/log/
+```
+
+## Standalone Model Quick Test
 
 ```bash
 python glrmamba.py
@@ -60,7 +131,7 @@ Expected output:
 output shape: (2, 12, 170, 1)
 ```
 
-## Minimal Usage
+## Minimal Standalone Usage
 
 ```python
 import torch

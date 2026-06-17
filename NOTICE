@@ -1,0 +1,9 @@
+GLRMamba
+Copyright 2026 GLRMamba contributors
+
+This repository includes a compact, adapted LibCity-style pipeline for running
+GLRMamba traffic forecasting experiments.
+
+LibCity is available at https://github.com/LibCity/Bigscity-LibCity and is
+distributed under the Apache License 2.0. If you use the LibCity framework or
+this adapted pipeline, please cite the LibCity papers listed in README.md.

@@ -1,0 +1,16 @@
+{
+    "traffic_state_pred": {
+        "allowed_model": [
+            "MambaFormer"
+        ],
+        "allowed_dataset": [
+            "PEMSD4",
+            "PEMSD8"
+        ],
+        "MambaFormer": {
+            "dataset_class": "TrafficStatePointDataset",
+            "executor": "TrafficStateExecutor",
+            "evaluator": "TrafficStateEvaluator"
+        }
+    }
+}

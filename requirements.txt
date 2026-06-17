@@ -1,2 +1,52 @@
-torch
-einops
+--extra-index-url https://download.pytorch.org/whl/cu113
+
+# Core deep learning framework
+torch==1.12.1+cu113
+torchaudio==0.12.1+cu113
+torchvision==0.13.1+cu113
+
+# Data processing and scientific computing
+numpy==1.22.0
+pandas==1.1.5
+scipy==1.7.3
+scikit-learn==0.24.0
+
+# Time-series analysis
+fastdtw==0.3.4
+statsmodels==0.13.1
+
+# Graph and network analysis
+networkx==2.5.1
+
+# Text-feature utilities inherited from the LibCity-style pipeline
+nltk==3.2.4
+gensim==4.0.1
+
+# Visualization and monitoring
+matplotlib==3.7.5
+tensorboard==2.4.1
+tqdm==4.60.0
+tabulate==0.8.9
+
+# Hyperparameter optimization
+hyperopt==0.2.5
+ray==1.4.1
+
+# Development and tests
+flake8==3.3.0
+pep8-naming==0.4.1
+pytest==3.2.1
+
+# System and config utilities
+protobuf==3.20.0
+PyYAML==6.0.2
+
+# Optional GPU monitoring
+nvidia-ml-py==13.580.65
+gpustat==1.1.1
+
+# Tensor rearrangement
+einops>=0.6.0
+
+# Optional but recommended for the reported GLRMamba setting:
+# install mamba-ssm separately in a compatible CUDA/Linux environment.

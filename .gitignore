@@ -1,10 +1,34 @@
+# Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+
+# Environments
 .venv/
 venv/
 env/
+*.egg-info/
+
+# IDE / OS
 .idea/
 .vscode/
+.DS_Store
+Thumbs.db
+
+# Data and generated artifacts
+raw_data/*
+!raw_data/README.md
+libcity/cache/
+libcity/tmp/
+libcity/log/*.log
+
+# Local experiment outputs
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz

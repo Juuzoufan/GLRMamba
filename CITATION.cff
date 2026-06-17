@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the GLRMamba manuscript."
+title: "GLRMamba: Normalized Graph-Guided State Space Modeling for Centralized IoT Roadway Traffic Forecasting"
+authors:
+  - family-names: Huang
+    given-names: Ke
+  - family-names: Fan
+    given-names: Xuanxuan
+date-released: 2026-06-17
+repository-code: "https://github.com/Juuzoufan/GLRMamba"
+license: Apache-2.0
+keywords:
+  - traffic forecasting
+  - state space models
+  - Mamba
+  - graph attention
+  - IoT sensing
