@@ -24,6 +24,19 @@ It is not a full experimental reproduction package. Raw datasets, checkpoints,
 training logs, baseline implementations, and manuscript-specific experiment
 scripts are not included.
 
+## Relationship to LibCity
+
+The full experimental workflow of GLRMamba was organized in a LibCity-style
+traffic forecasting pipeline. This lightweight repository keeps only the core
+PyTorch model for public inspection and reuse.
+
+For the complete urban spatial-temporal prediction framework, dataset format,
+and evaluation pipeline, please refer to LibCity:
+
+- Homepage: https://libcity.ai/
+- GitHub: https://github.com/LibCity/Bigscity-LibCity
+- Documentation: https://bigscity-libcity-docs.readthedocs.io/
+
 ## Install
 
 ```bash
@@ -76,3 +89,33 @@ print(y.shape)  # (8, 12, 170, 1)
 - Graph-guided spatial attention with a learnable bias gate.
 - Learnable Fourier temporal encoding for daily and weekly periodicity.
 - Parallel horizon predictor with residual-mixture forecasting.
+
+## References
+
+If you use the LibCity framework together with GLRMamba, please cite LibCity:
+
+```bibtex
+@inproceedings{libcity,
+  author = {Wang, Jingyuan and Jiang, Jiawei and Jiang, Wenjun and Li, Chao and Zhao, Wayne Xin},
+  title = {LibCity: An Open Library for Traffic Prediction},
+  year = {2021},
+  isbn = {9781450386647},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3474717.3483923},
+  doi = {10.1145/3474717.3483923},
+  booktitle = {Proceedings of the 29th International Conference on Advances in Geographic Information Systems},
+  pages = {145--148},
+  numpages = {4},
+  keywords = {Spatial-temporal System, Reproducibility, Traffic Prediction},
+  location = {Beijing, China},
+  series = {SIGSPATIAL '21}
+}
+
+@article{libcitylong,
+  title = {LibCity: A Unified Library Towards Efficient and Comprehensive Urban Spatial-Temporal Prediction},
+  author = {Jiang, Jiawei and Han, Chengkai and Jiang, Wenjun and Zhao, Wayne Xin and Wang, Jingyuan},
+  journal = {arXiv preprint arXiv:2304.14343},
+  year = {2023}
+}
+```
